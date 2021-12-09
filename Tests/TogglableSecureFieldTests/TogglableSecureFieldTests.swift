@@ -2,10 +2,15 @@ import XCTest
 @testable import TogglableSecureField
 
 final class TogglableSecureFieldTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(TogglableSecureField().text, "Hello, World!")
+    func testLoginButton() throws {
+        let app = XCUIApplication()
+        app.launch()
+     
+        let login = app.buttons["Login"]
+        
+        let view = TogglableSecureField_Previews.previews
+        XCUI
+     
+        XCTAssert(login.exists)
     }
 }
