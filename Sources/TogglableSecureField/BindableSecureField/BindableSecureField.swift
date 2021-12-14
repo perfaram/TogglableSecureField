@@ -9,15 +9,14 @@ public struct BindableSecureField: View {
     public let onCommit: Self.Completion
     
     internal let placeholderView: Text
-    internal var _useMonospacedFont: Bool = true
+    internal var _useMonospacedFont: Bool = false
     
     public var body: some View {
         ZStack(alignment: .leading) {
             if secureContent.wrappedValue.isEmpty {
                 placeholderView
-                    .foregroundColor(Color(UIColor.placeholderText))
-                    .allowsHitTesting(false)
-                    .accessibilityHidden(true)
+                    .monospaced(_useMonospacedFont)
+                    .placeholderStyled
             }
             BindableSecureField.ViewRepresentable(
                 secureContent: secureContent,

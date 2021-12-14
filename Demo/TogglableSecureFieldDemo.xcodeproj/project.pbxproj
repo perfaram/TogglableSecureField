@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		F704D0C127628999006F3F19 /* TogglableSecureFieldDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0C027628999006F3F19 /* TogglableSecureFieldDemoApp.swift */; };
-		F704D0C327628999006F3F19 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0C227628999006F3F19 /* ContentView.swift */; };
+		F704D0C327628999006F3F19 /* TogglableDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0C227628999006F3F19 /* TogglableDemoView.swift */; };
 		F704D0C52762899E006F3F19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F704D0C42762899E006F3F19 /* Assets.xcassets */; };
 		F704D0C82762899E006F3F19 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F704D0C72762899E006F3F19 /* Preview Assets.xcassets */; };
 		F704D0D22762899E006F3F19 /* TogglableSecureFieldDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0D12762899E006F3F19 /* TogglableSecureFieldDemoTests.swift */; };
 		F704D0DC2762899E006F3F19 /* TogglableSecureFieldDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0DB2762899E006F3F19 /* TogglableSecureFieldDemoUITests.swift */; };
 		F704D0DE2762899E006F3F19 /* TogglableSecureFieldDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0DD2762899E006F3F19 /* TogglableSecureFieldDemoUITestsLaunchTests.swift */; };
 		F704D0F027628F15006F3F19 /* TogglableSecureField in Frameworks */ = {isa = PBXBuildFile; productRef = F704D0EF27628F15006F3F19 /* TogglableSecureField */; };
+		F704D0F42768A062006F3F19 /* BindableDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0F32768A062006F3F19 /* BindableDemoView.swift */; };
+		F704D0F62768A336006F3F19 /* MonospaceDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0F52768A336006F3F19 /* MonospaceDemoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,7 @@
 /* Begin PBXFileReference section */
 		F704D0BD27628999006F3F19 /* TogglableSecureFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TogglableSecureFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F704D0C027628999006F3F19 /* TogglableSecureFieldDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglableSecureFieldDemoApp.swift; sourceTree = "<group>"; };
-		F704D0C227628999006F3F19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F704D0C227628999006F3F19 /* TogglableDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglableDemoView.swift; sourceTree = "<group>"; };
 		F704D0C42762899E006F3F19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F704D0C72762899E006F3F19 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F704D0CD2762899E006F3F19 /* TogglableSecureFieldDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TogglableSecureFieldDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +48,8 @@
 		F704D0DB2762899E006F3F19 /* TogglableSecureFieldDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglableSecureFieldDemoUITests.swift; sourceTree = "<group>"; };
 		F704D0DD2762899E006F3F19 /* TogglableSecureFieldDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglableSecureFieldDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F704D0F227628F20006F3F19 /* TogglableSecureField */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TogglableSecureField; path = ..; sourceTree = "<group>"; };
+		F704D0F32768A062006F3F19 /* BindableDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableDemoView.swift; sourceTree = "<group>"; };
+		F704D0F52768A336006F3F19 /* MonospaceDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonospaceDemoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				F704D0C027628999006F3F19 /* TogglableSecureFieldDemoApp.swift */,
-				F704D0C227628999006F3F19 /* ContentView.swift */,
+				F704D0F52768A336006F3F19 /* MonospaceDemoView.swift */,
+				F704D0F32768A062006F3F19 /* BindableDemoView.swift */,
+				F704D0C227628999006F3F19 /* TogglableDemoView.swift */,
 				F704D0C42762899E006F3F19 /* Assets.xcassets */,
 				F704D0C62762899E006F3F19 /* Preview Content */,
 			);
@@ -275,8 +281,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F704D0C327628999006F3F19 /* ContentView.swift in Sources */,
+				F704D0C327628999006F3F19 /* TogglableDemoView.swift in Sources */,
+				F704D0F42768A062006F3F19 /* BindableDemoView.swift in Sources */,
 				F704D0C127628999006F3F19 /* TogglableSecureFieldDemoApp.swift in Sources */,
+				F704D0F62768A336006F3F19 /* MonospaceDemoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

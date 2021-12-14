@@ -6,7 +6,7 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
     private var leftViewClosure: (() -> LeftViewT)? = nil
     public var password: Binding<String>
     public let onCommit: BindableSecureField.Completion
-    private var _useMonospacedFont: Bool = true
+    private var _useMonospacedFont: Bool = false
     
     @State public var showPassword: Bool = false
     
@@ -32,9 +32,8 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
             ZStack(alignment: .leading) {
                 if password.wrappedValue.isEmpty {
                     placeholderView
-                        .foregroundColor(Color(UIColor.placeholderText))
-                        .allowsHitTesting(false)
-                        .accessibilityHidden(true)
+                        .monospaced(_useMonospacedFont)
+                        .placeholderStyled
                 }
                 secureTextField()
             }

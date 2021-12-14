@@ -11,7 +11,22 @@ import SwiftUI
 struct TogglableSecureFieldDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                TogglableDemoView()
+                    .tabItem {
+                        Label("Togglable", systemImage: "eye.fill")
+                    }
+
+                MonospaceDemoView()
+                    .tabItem {
+                        Label("Monospaced", systemImage: "a.square.fill")
+                    }
+                
+                BindableDemoView()
+                    .tabItem {
+                        Label("Bindable", systemImage: "powerplug.fill")
+                    }
+            }
         }
     }
 }
