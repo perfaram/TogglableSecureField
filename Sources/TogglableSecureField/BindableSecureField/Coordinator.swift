@@ -9,7 +9,6 @@ extension BindableSecureField.ViewRepresentable {
         private var onCommit: BindableSecureField.Completion
         
         init(parent: BindableSecureField.ViewRepresentable,
-             label: String,
              onCommit: @escaping BindableSecureField.Completion)
         {
             let textField = SecureContentPreservingUITextField(frame: .zero)
@@ -25,11 +24,6 @@ extension BindableSecureField.ViewRepresentable {
             // unboundedly in the horizontal direction to fit its content
             textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             
-            // Match SwiftUI's (Secure)TextField accessibility features
-            textField.isAccessibilityElement = true
-            textField.accessibilityLabel = label
-            textField.accessibilityIdentifier = label
-                
             self.backingTextField = textField
             self.onCommit = onCommit
             self.lastContent = parent.secureContent.wrappedValue

@@ -2,7 +2,6 @@ import SwiftUI
 
 public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
     
-    public var label: String
     private var placeholderView: Text
     private var leftViewClosure: (() -> LeftViewT)? = nil
     public var password: Binding<String>
@@ -21,10 +20,10 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
     @ViewBuilder func secureTextField() -> some View {
         BindableSecureField.ViewRepresentable(secureContent: password,
                                               showContent: $showPassword,
-                                              label: label,
                                               onCommit: onCommit)
             .useMonospacedFont(_useMonospacedFont)
-            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: textFieldHeight, alignment: .center)
+            .accessibilityLabel(placeholderView)
+            .frame(maxWidth: .infinity, maxHeight: textFieldHeight, alignment: .center)
     }
     
     public var body: some View {
@@ -71,7 +70,6 @@ extension TogglableSecureField where LeftViewT == Never {
                 secureContent contentBinding: Binding<String>,
                 onCommit: @escaping BindableSecureField.Completion)
     {
-        self.label = localizedLabel.toString()
         self.placeholderView = Text(localizedLabel)
         self.password = contentBinding
         self.onCommit = onCommit
@@ -83,7 +81,6 @@ extension TogglableSecureField where LeftViewT == Never {
                    onCommit: @escaping BindableSecureField.Completion)
     where S : StringProtocol
     {
-        self.label = String(title)
         self.placeholderView = Text(title)
         self.password = contentBinding
         self.onCommit = onCommit
@@ -96,7 +93,6 @@ extension TogglableSecureField where LeftViewT: View {
                 @ViewBuilder leftView: @escaping () -> LeftViewT,
                 onCommit: @escaping BindableSecureField.Completion)
     {
-        self.label = localizedLabel.toString()
         self.placeholderView = Text(localizedLabel)
         self.leftViewClosure = leftView
         self.password = contentBinding
@@ -110,7 +106,6 @@ extension TogglableSecureField where LeftViewT: View {
                    onCommit: @escaping BindableSecureField.Completion)
     where S : StringProtocol
     {
-        self.label = String(title)
         self.placeholderView = Text(title)
         self.leftViewClosure = leftView
         self.password = contentBinding
