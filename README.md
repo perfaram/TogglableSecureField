@@ -4,16 +4,12 @@
 <img src="https://raw.githubusercontent.com/perfaram/TogglableSecureField/main/Demo/demo.gif" height="450" alt="TogglableSecureField demo"/>
 
 ## What
-Description
-
-## Why?
-SwiftUI is great, but currently it's anything but straightforward to build a password input control that can show its content. Most solutions end up using a `Binding<Bool>` to control which field to show, and a conditional in the view builder. This requires hackery to transfer the keyboard focus or keep cursor position, and tends to make the UI stutter when toggling between states. 
-`TogglableSecureField` solves the problem by wrapping a UITextField in a UIViewRepresentable, in an elegant manner. `TogglableSecureField` also preserves `TextField`/`SecureField`'s natural accessibility features. 
+TogglableSecureField is a small SPM package that provides an easy-to-use replacement for SwiftUI's `SecureField`/`TextField`, which adds a show/hide password feature.
 
 ## How
 This package requires iOS 13 at least.
 
-### Installation
+### Installation
 Through [Swift Package Manager](https://swift.org/package-manager/), either:
 * manually, by adding it to the `dependencies` of your `Package.swift`
     ```swift
@@ -69,3 +65,8 @@ If you don't want to use the provided toggle button, this package also provides 
 
 #### `.useMonospacedFont()`
 `.useMonospacedFont()` is a modifier available on `TogglableSecureField` and `BindableSecureField` that, you guessed it, changes the font to a monospace font. Because every character has the same width, toggling between "bullets" / secure password mode and plain text then preserves the characters' positions. It is then straightforward for the user to visually map the "bullets" to their underlying characters. This is perhaps desirable from a UX perspective. 
+
+## Why
+SwiftUI is great, but currently it's anything but straightforward to build a password input control that can optionally show its content as plaintext. [Most solutions](https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature) end up using a `Binding<Bool>` to control which field to show, and a conditional in the view builder. This requires hackery to transfer the keyboard focus or keep cursor position, and tends to make the UI layout stutter when toggling between states. `SecureField` also has the unwieldy feature of erasing itself when the user attemps to edit his password.
+
+`TogglableSecureField` solves the problem by wrapping a UITextField in a UIViewRepresentable, in an elegant manner. `TogglableSecureField` also preserves `TextField`/`SecureField`'s natural accessibility features. 
