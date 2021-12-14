@@ -35,6 +35,12 @@ extension BindableSecureField.ViewRepresentable {
             super.init()
             
             self.backingTextField.delegate = self
+            
+            //let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
+            //self.backingTextField.addGestureRecognizer(longPressRecognizer)
+            let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panned(recognizer:)))
+            self.backingTextField.addGestureRecognizer(panRecognizer)
+            
         }
         
         func update(content: String,
@@ -57,6 +63,24 @@ extension BindableSecureField.ViewRepresentable {
             
             if content != lastContent {
                 backingTextField.text = content
+            }
+        }
+        
+        @objc func longPressed(recognizer: UILongPressGestureRecognizer) {
+            print("longpressed")
+        }
+        
+        @objc func panned(recognizer: UILongPressGestureRecognizer) {
+            //self.backingTextField.isSecureTextEntry = false
+            //self.parent.showContent.wrappedValue = true
+            
+            if recognizer.state == .began {
+                self.backingTextField.isSecureTextEntry = false
+                self.parent.showContent.wrappedValue = true
+            }
+            else if recognizer.state == .ended {
+                self.backingTextField.isSecureTextEntry = true
+                self.parent.showContent.wrappedValue = false
             }
         }
         
