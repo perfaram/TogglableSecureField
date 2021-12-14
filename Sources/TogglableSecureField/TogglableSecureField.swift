@@ -23,13 +23,11 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
                                               onCommit: onCommit)
             .useMonospacedFont(_useMonospacedFont)
             .accessibilityLabel(placeholderView)
-            .frame(maxWidth: .infinity, maxHeight: textFieldHeight, alignment: .center)
     }
     
     public var body: some View {
         HStack{
             leftViewClosure?()
-                .frame(width: 18, height: 18, alignment: .center)
             
             ZStack(alignment: .leading) {
                 if password.wrappedValue.isEmpty {
@@ -46,9 +44,6 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
                     self.showPassword.toggle()
                 }, label: {
                     ZStack(alignment: .trailing){
-                        Color.clear
-                            .frame(maxWidth: 29, maxHeight: textFieldHeight, alignment: .center)
-                        
                         // Eye(.slash) also provide a default, localized accessibility identifier for this button.
                         // Eye = Show; Eye.Slash = Hide
                         // This seems to be a SwiftUI feature.
@@ -59,9 +54,6 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
                 })
             }
         }
-        .padding(.horizontal, 15)
-        .background(Color.primary.opacity(0.05).cornerRadius(10))
-        .padding(0)
     }
 }
 

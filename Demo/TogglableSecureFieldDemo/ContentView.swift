@@ -22,6 +22,7 @@ struct ContentView: View {
                 .disabled(true)
                 .padding([.bottom, .horizontal])
         }
+        SecureField("test", text: $password).padding()
         
         TogglableSecureField("MyTogglablePasswordField",
                              secureContent: $password,
@@ -29,6 +30,7 @@ struct ContentView: View {
             Image(systemName: "lock.fill")
                 .foregroundColor($password.wrappedValue.isEmpty ? .secondary : .primary)
                 .font(.system(size: 18, weight: .medium, design: .default))
+                .frame(width: 18, height: 18, alignment: .center)
                 .accessibilityHidden(true)
         },
                              onCommit: {
@@ -36,7 +38,10 @@ struct ContentView: View {
             print(password)
         })
             .useMonospacedFont($useMonospacedFont.wrappedValue)
+            .padding(12)
+            .background(Color.primary.opacity(0.05).cornerRadius(10))
             .padding()
+        
         Button("Toggle monospaced font") {
             useMonospacedFont.toggle()
         }

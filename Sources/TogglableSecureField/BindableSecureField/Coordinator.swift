@@ -24,6 +24,9 @@ extension BindableSecureField.ViewRepresentable {
             // unboundedly in the horizontal direction to fit its content
             textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             
+            textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+            textField.setContentCompressionResistancePriority(.required, for: .vertical)
+            
             self.backingTextField = textField
             self.onCommit = onCommit
             self.lastContent = parent.secureContent.wrappedValue
