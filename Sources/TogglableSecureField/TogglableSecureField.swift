@@ -1,133 +1,58 @@
 import SwiftUI
 
-class SecureContentPreservingUITextField: UITextField {
-    override var isSecureTextEntry: Bool {
-        didSet {
-            if isFirstResponder {
-                _ = becomeFirstResponder()
-            }
-        }
-    }
+public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
     
-    override func becomeFirstResponder() -> Bool {
-        let cursorRange = self.selectedTextRange
-        let success = super.becomeFirstResponder()
-        if isSecureTextEntry, let text = self.text {
-            self.text?.removeAll()
-            insertText(text)
-            self.text = text
-        }
-        self.selectedTextRange = cursorRange
-        return success
-    }
-}
-
-struct BoundSecurityTextField: UIViewRepresentable {
-    @Binding var text: String
-    @Binding var showPassword: Bool
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    func updateUIViewFont(_ textField: SecureContentPreservingUITextField, context: Context) {
-        let font: UIFont
-        if textField.isSecureTextEntry {
-            font = UIFont.monospacedSystemFont(ofSize: textField.font!.pointSize,
-                                               weight: UIFont.Weight.regular)
-        }
-        else {
-            font = UIFont.monospacedSystemFont(ofSize: textField.font!.pointSize,
-                                               weight: UIFont.Weight.regular)
-        }
-        textField.font = font
-    }
-
-    let textField = SecureContentPreservingUITextField()
-    func makeUIView(context: Context) -> SecureContentPreservingUITextField {
-        textField.delegate = context.coordinator
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
-        textField.keyboardType = .default
-        textField.text = text
-        textField.textContentType = .password
-        textField.isSecureTextEntry = !showPassword
-        updateUIViewFont(textField, context: context)
-        return textField
-    }
-
-    func updateUIView(_ textField: SecureContentPreservingUITextField, context: Context) {
-        if !showPassword != textField.isSecureTextEntry {
-            textField.isSecureTextEntry = !showPassword
-            updateUIViewFont(textField, context: context)
-        }
-        
-        if text != context.coordinator.currentText {
-            textField.text = text
-        }
-    }
-    
-    func onCommit(_ closure: @escaping () -> Void) -> Self {
-        textField.addAction(UIAction(handler: { _ in
-            closure()
-        }), for: UIControl.Event.primaryActionTriggered)
-        return self
-    }
-    
-    class Coordinator: NSObject, UITextFieldDelegate {
-        var parent: BoundSecurityTextField
-        var currentText: String
-        
-        init(_ parent: BoundSecurityTextField) {
-            currentText = parent.$text.wrappedValue
-            self.parent = parent
-        }
-        
-        func textField(_ textField: UITextField,
-                       shouldChangeCharactersIn range: NSRange,
-                       replacementString string: String) -> Bool
-        {
-            guard let oldText = textField.text, let textRange = Range(range, in: oldText) else {
-                return false
-            }
-
-            currentText = oldText.replacingCharacters(in: textRange, with: string)
-            parent.$text.wrappedValue = currentText
-
-            return true
-        }
-    }
-}
-
-public struct TogglableSecureField: View {
-    @Binding public var password: String
-    public let completionAction: () -> Void
+    public var label: String
+    private var placeholderView: Text
+    private var leftViewClosure: (() -> LeftViewT)? = nil
+    public var password: Binding<String>
+    public let onCommit: BindableSecureField.Completion
+    private var _useMonospacedFont: Bool = true
     
     @State public var showPassword: Bool = false
     
+    public func useMonospacedFont(_ useMonospaced: Bool = true) -> Self {
+        var this = self
+        this._useMonospacedFont = useMonospaced
+        return this
+    }
+    
+    let textFieldHeight: CGFloat = 50
     @ViewBuilder func secureTextField() -> some View {
-        BoundSecurityTextField(text: $password, showPassword: $showPassword)
-            .onCommit {
-                guard !password.isEmpty else { return }
-                completionAction()
-            }
-            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60, alignment: .center)
+        BindableSecureField.ViewRepresentable(secureContent: password,
+                                              showContent: $showPassword,
+                                              label: label,
+                                              onCommit: onCommit)
+            .useMonospacedFont(_useMonospacedFont)
+            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: textFieldHeight, alignment: .center)
     }
     
     public var body: some View {
         HStack{
-            Image(systemName: "lock.fill")
-                .foregroundColor(password.isEmpty ? .secondary : .primary)
-                .font(.system(size: 18, weight: .medium, design: .default))
+            leftViewClosure?()
                 .frame(width: 18, height: 18, alignment: .center)
-            secureTextField()
-            if !password.isEmpty {
+            
+            ZStack(alignment: .leading) {
+                if password.wrappedValue.isEmpty {
+                    placeholderView
+                        .foregroundColor(Color(UIColor.placeholderText))
+                        .allowsHitTesting(false)
+                        .accessibilityHidden(true)
+                }
+                secureTextField()
+            }
+            
+            if !password.wrappedValue.isEmpty {
                 Button(action: {
                     self.showPassword.toggle()
                 }, label: {
                     ZStack(alignment: .trailing){
                         Color.clear
-                            .frame(maxWidth: 29, maxHeight: 60, alignment: .center)
+                            .frame(maxWidth: 29, maxHeight: textFieldHeight, alignment: .center)
+                        
+                        // Eye(.slash) also provide a default, localized accessibility identifier for this button.
+                        // Eye = Show; Eye.Slash = Hide
+                        // This seems to be a SwiftUI feature.
                         Image(systemName: self.showPassword ? "eye.slash.fill" : "eye.fill")
                             .font(.system(size: 18, weight: .medium))
                             .foregroundColor(Color.init(red: 160.0/255.0, green: 160.0/255.0, blue: 160.0/255.0))
@@ -141,6 +66,57 @@ public struct TogglableSecureField: View {
     }
 }
 
+extension TogglableSecureField where LeftViewT == Never {
+    public init(_ localizedLabel: LocalizedStringKey,
+                secureContent contentBinding: Binding<String>,
+                onCommit: @escaping BindableSecureField.Completion)
+    {
+        self.label = localizedLabel.toString()
+        self.placeholderView = Text(localizedLabel)
+        self.password = contentBinding
+        self.onCommit = onCommit
+    }
+    
+    @_disfavoredOverload
+    public init<S>(_ title: S,
+                   secureContent contentBinding: Binding<String>,
+                   onCommit: @escaping BindableSecureField.Completion)
+    where S : StringProtocol
+    {
+        self.label = String(title)
+        self.placeholderView = Text(title)
+        self.password = contentBinding
+        self.onCommit = onCommit
+    }
+}
+
+extension TogglableSecureField where LeftViewT: View {
+    public init(_ localizedLabel: LocalizedStringKey,
+                secureContent contentBinding: Binding<String>,
+                @ViewBuilder leftView: @escaping () -> LeftViewT,
+                onCommit: @escaping BindableSecureField.Completion)
+    {
+        self.label = localizedLabel.toString()
+        self.placeholderView = Text(localizedLabel)
+        self.leftViewClosure = leftView
+        self.password = contentBinding
+        self.onCommit = onCommit
+    }
+    
+    @_disfavoredOverload
+    public init<S>(_ title: S,
+                   secureContent contentBinding: Binding<String>,
+                   @ViewBuilder leftView: @escaping () -> LeftViewT,
+                   onCommit: @escaping BindableSecureField.Completion)
+    where S : StringProtocol
+    {
+        self.label = String(title)
+        self.placeholderView = Text(title)
+        self.leftViewClosure = leftView
+        self.password = contentBinding
+        self.onCommit = onCommit
+    }
+}
 
 
 public struct TogglableSecureField_Previews: PreviewProvider {
@@ -160,9 +136,10 @@ public struct TogglableSecureField_Previews: PreviewProvider {
     
     public static var previews: some View {
         StatefulPreviewWrapper("") { wrapper, binding in
-            TogglableSecureField(password: binding, completionAction: {
+            TogglableSecureField("DemoField", secureContent: binding, onCommit: {
                 print(wrapper.value)
             })
+                .useMonospacedFont()
         }
         .padding()
     }

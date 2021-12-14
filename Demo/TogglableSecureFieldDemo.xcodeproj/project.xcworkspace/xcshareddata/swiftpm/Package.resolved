@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "TogglableSecureField",
+        "repositoryURL": "https://github.com/perfaram/TogglableSecureField",
+        "state": {
+          "branch": null,
+          "revision": "446f78d0f29bb35ceea03c0e0e7067da28556d25",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

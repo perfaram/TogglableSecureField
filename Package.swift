@@ -24,8 +24,7 @@ let package = Package(
         .target(
             name: "TogglableSecureField",
             dependencies: []),
-        .testTarget(
-            name: "TogglableSecureFieldTests",
-            dependencies: ["TogglableSecureField"]),
+        // There is no test target, because this package contains SwiftUI code that cannot be tested this way.
+        // Instead, we rely on the Demo app's UITesting to test TogglableSecureField.
     ]
 )
