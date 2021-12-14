@@ -1,5 +1,6 @@
 # TogglableSecureField
 **SwiftUI password field with show/hide feature**
+
 <img src="https://raw.githubusercontent.com/perfaram/TogglableSecureField/main/Demo/demo.gif" height="450" alt="TogglableSecureField demo"/>
 
 ## What
