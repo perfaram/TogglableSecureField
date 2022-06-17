@@ -1,7 +1,7 @@
 # TogglableSecureField
 **SwiftUI password field with show/hide feature**
 
-<img src="https://raw.githubusercontent.com/perfaram/TogglableSecureField/main/Demo/demo.gif" height="450" alt="TogglableSecureField demo"/>
+<img src="https://raw.githubusercontent.com/perfaram/TogglableSecureField/main/Demo/demo.gif" width="294" height="640" alt="TogglableSecureField demo"/>
 
 ## What
 TogglableSecureField is a small SPM package that provides an easy-to-use replacement for SwiftUI's `SecureField`/`TextField`, which adds a show/hide password feature.
