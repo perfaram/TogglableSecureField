@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4FF253F52A34A72E0029EDEE /* TogglableInListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF253F42A34A72E0029EDEE /* TogglableInListDemoView.swift */; };
 		F704D0C127628999006F3F19 /* TogglableSecureFieldDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0C027628999006F3F19 /* TogglableSecureFieldDemoApp.swift */; };
 		F704D0C327628999006F3F19 /* TogglableDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704D0C227628999006F3F19 /* TogglableDemoView.swift */; };
 		F704D0C52762899E006F3F19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F704D0C42762899E006F3F19 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4FF253F42A34A72E0029EDEE /* TogglableInListDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TogglableInListDemoView.swift; sourceTree = "<group>"; };
 		F704D0BD27628999006F3F19 /* TogglableSecureFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TogglableSecureFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F704D0C027628999006F3F19 /* TogglableSecureFieldDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglableSecureFieldDemoApp.swift; sourceTree = "<group>"; };
 		F704D0C227628999006F3F19 /* TogglableDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglableDemoView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		F704D0BF27628999006F3F19 /* TogglableSecureFieldDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4FF253F42A34A72E0029EDEE /* TogglableInListDemoView.swift */,
 				F704D0C027628999006F3F19 /* TogglableSecureFieldDemoApp.swift */,
 				F704D0F52768A336006F3F19 /* MonospaceDemoView.swift */,
 				F704D0F32768A062006F3F19 /* BindableDemoView.swift */,
@@ -285,6 +288,7 @@
 				F704D0F42768A062006F3F19 /* BindableDemoView.swift in Sources */,
 				F704D0C127628999006F3F19 /* TogglableSecureFieldDemoApp.swift in Sources */,
 				F704D0F62768A336006F3F19 /* MonospaceDemoView.swift in Sources */,
+				4FF253F52A34A72E0029EDEE /* TogglableInListDemoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,16 +17,9 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
     }
     
     let textFieldHeight: CGFloat = 50
-    @ViewBuilder func secureTextField() -> some View {
-        BindableSecureField.ViewRepresentable(secureContent: password,
-                                              showContent: $showPassword,
-                                              onCommit: onCommit)
-            .useMonospacedFont(_useMonospacedFont)
-            .accessibilityLabel(placeholderView)
-    }
     
     public var body: some View {
-        HStack{
+        HStack {
             leftViewClosure?()
             
             ZStack(alignment: .leading) {
@@ -35,7 +28,7 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
                         .monospaced(_useMonospacedFont)
                         .placeholderStyled
                 }
-                secureTextField()
+                secureTextField
             }
             
             if !password.wrappedValue.isEmpty {
@@ -53,6 +46,15 @@ public struct TogglableSecureField<LeftViewT>: View where LeftViewT: View {
                 })
             }
         }
+        .buttonStyle(.plain)
+    }
+
+    @ViewBuilder var secureTextField: some View {
+        BindableSecureField.ViewRepresentable(secureContent: password,
+                                              showContent: $showPassword,
+                                              onCommit: onCommit)
+            .useMonospacedFont(_useMonospacedFont)
+            .accessibilityLabel(placeholderView)
     }
 }
 

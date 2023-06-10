@@ -35,6 +35,8 @@ struct MonospaceDemoView: View {
             Button("Toggle monospaced font") {
                 useMonospacedFont.toggle()
             }
+            .buttonStyle(.plain)
+            .foregroundColor(.blue)
         }
     }
 }
