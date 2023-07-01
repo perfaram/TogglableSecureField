@@ -26,6 +26,9 @@ struct BindableDemoView: View {
             Button((passwordShown ? "Hide" : "Show") + " password") {
                 passwordShown.toggle()
             }
+            .buttonStyle(.plain)
+            .foregroundColor(.blue)
+
         }
     }
 }

@@ -26,6 +26,11 @@ struct TogglableSecureFieldDemoApp: App {
                     .tabItem {
                         Label("Bindable", systemImage: "powerplug.fill")
                     }
+
+                TogglableInListDemoView()
+                    .tabItem {
+                        Label("List", systemImage: "list.bullet")
+                    }
             }
         }
     }

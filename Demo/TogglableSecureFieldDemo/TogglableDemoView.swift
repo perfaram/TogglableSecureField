@@ -44,6 +44,7 @@ struct TogglableDemoView: View {
                 .padding(12)
                 .background(Color.primary.opacity(0.05).cornerRadius(10))
                 .padding()
+                .buttonStyle(.plain)
         }
     }
 }
